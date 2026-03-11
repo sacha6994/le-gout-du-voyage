@@ -1,25 +1,41 @@
 "use client";
 
 import { useRef } from "react";
+import Image from "next/image";
 import { motion, useInView } from "framer-motion";
 import { fadeInUp } from "@/lib/animations";
 
 const images = [
-  { label: "Hibiscus", span: "col-span-2 row-span-2" },
-  { label: "Pacifique", span: "col-span-1 row-span-1" },
-  { label: "Aubrac", span: "col-span-1 row-span-1" },
-  { label: "Épices", span: "col-span-1 row-span-1" },
-  { label: "Terrasse", span: "col-span-1 row-span-1" },
-  { label: "Terroir", span: "col-span-2 row-span-1" },
-];
-
-const bgColors = [
-  "from-hibiscus/20 to-noir",
-  "from-pacifique/20 to-noir",
-  "from-tropical/20 to-noir",
-  "from-or/10 to-noir",
-  "from-tropical/15 to-noir",
-  "from-pacifique/15 to-noir",
+  {
+    label: "Le Chef",
+    span: "col-span-2 row-span-2",
+    src: "https://images.unsplash.com/photo-1648376884841-b7fe8b8f0765?w=900&q=80",
+  },
+  {
+    label: "Pacifique",
+    span: "col-span-1 row-span-1",
+    src: "https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?w=600&q=80",
+  },
+  {
+    label: "Aubrac",
+    span: "col-span-1 row-span-1",
+    src: "https://images.unsplash.com/photo-1594041680534-e8c8cdebd659?w=600&q=80",
+  },
+  {
+    label: "Épices",
+    span: "col-span-1 row-span-1",
+    src: "https://images.unsplash.com/photo-1553267574-277716d448fb?w=600&q=80",
+  },
+  {
+    label: "Terrasse",
+    span: "col-span-1 row-span-1",
+    src: "https://images.unsplash.com/photo-1640703607347-a5cefc15c86b?w=600&q=80",
+  },
+  {
+    label: "Terroir",
+    span: "col-span-2 row-span-1",
+    src: "https://images.unsplash.com/photo-1541832676-9b763b0239ab?w=900&q=80",
+  },
 ];
 
 export default function Galerie() {
@@ -58,28 +74,19 @@ export default function Galerie() {
               transition={{ delay: i * 0.12, duration: 0.7 }}
               className={`${img.span} relative overflow-hidden group cursor-pointer`}
             >
-              <div
-                className={`absolute inset-0 bg-gradient-to-br ${bgColors[i]} transition-transform duration-700 group-hover:scale-105`}
+              <Image
+                src={img.src}
+                alt={img.label}
+                fill
+                sizes={img.span.includes("col-span-2") ? "50vw" : "25vw"}
+                className="object-cover transition-transform duration-700 group-hover:scale-110"
+                loading="lazy"
               />
-              {/* Placeholder content */}
-              <div className="absolute inset-0 flex items-center justify-center">
-                <svg
-                  className="w-12 h-12 text-or/20"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={1}
-                    d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"
-                  />
-                </svg>
-              </div>
+              {/* Dark vignette */}
+              <div className="absolute inset-0 bg-gradient-to-t from-noir/70 via-transparent to-noir/20 pointer-events-none" />
               {/* Hover overlay */}
-              <div className="absolute inset-0 bg-noir/60 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-center justify-center">
-                <span className="font-[family-name:var(--font-cormorant)] text-or text-2xl italic">
+              <div className="absolute inset-0 bg-noir/50 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-center justify-center">
+                <span className="font-[family-name:var(--font-cormorant)] text-or text-2xl italic translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
                   {img.label}
                 </span>
               </div>
@@ -101,24 +108,15 @@ export default function Galerie() {
               transition={{ delay: i * 0.1, duration: 0.6 }}
               className="snap-center flex-shrink-0 w-[75vw] aspect-[4/5] relative overflow-hidden"
             >
-              <div
-                className={`absolute inset-0 bg-gradient-to-br ${bgColors[i]}`}
+              <Image
+                src={img.src}
+                alt={img.label}
+                fill
+                sizes="75vw"
+                className="object-cover"
+                loading="lazy"
               />
-              <div className="absolute inset-0 flex items-center justify-center">
-                <svg
-                  className="w-10 h-10 text-or/20"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={1}
-                    d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"
-                  />
-                </svg>
-              </div>
+              <div className="absolute inset-0 bg-gradient-to-t from-noir/80 via-transparent to-transparent pointer-events-none" />
               <div className="absolute bottom-4 left-4">
                 <span className="font-[family-name:var(--font-cormorant)] text-or text-xl italic">
                   {img.label}

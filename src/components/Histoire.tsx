@@ -1,6 +1,7 @@
 "use client";
 
 import { useRef } from "react";
+import Image from "next/image";
 import { motion, useScroll, useTransform, useInView } from "framer-motion";
 import { fadeInUp, slideInLeft, slideInRight } from "@/lib/animations";
 
@@ -89,29 +90,16 @@ export default function Histoire() {
             className="relative"
           >
             <div className="relative aspect-[3/4] bg-noir-light overflow-hidden">
-              {/* Placeholder for chef photo */}
-              <div className="absolute inset-0 bg-gradient-to-br from-pacifique/30 via-noir-light to-noir flex items-center justify-center">
-                <div className="text-center">
-                  <div className="w-24 h-24 mx-auto mb-4 border border-or/30 rounded-full flex items-center justify-center">
-                    <svg
-                      className="w-10 h-10 text-or/40"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={1}
-                        d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
-                      />
-                    </svg>
-                  </div>
-                  <p className="text-or/40 text-sm tracking-widest uppercase">
-                    Chef Thomas Sabrié
-                  </p>
-                </div>
-              </div>
+              <Image
+                src="https://images.unsplash.com/photo-1502364271109-0a9a75a2a9df?w=800&q=80"
+                alt="Chef Thomas Sabrié en cuisine"
+                fill
+                sizes="(max-width: 1024px) 100vw, 50vw"
+                className="object-cover"
+                priority
+              />
+              {/* Dark gradient overlay */}
+              <div className="absolute inset-0 bg-gradient-to-t from-noir/60 via-transparent to-noir/20 pointer-events-none" />
               {/* Decorative border */}
               <div className="absolute inset-4 border border-or/10 pointer-events-none" />
             </div>

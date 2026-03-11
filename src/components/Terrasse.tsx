@@ -4,6 +4,7 @@ import { useRef } from "react";
 import Image from "next/image";
 import { motion, useInView } from "framer-motion";
 import { fadeInUp, staggerContainer, staggerItem } from "@/lib/animations";
+import { useDayNight } from "@/context/DayNightContext";
 
 const features = [
   {
@@ -39,17 +40,26 @@ const features = [
 export default function Terrasse() {
   const ref = useRef<HTMLElement>(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
+  const { isDay } = useDayNight();
 
   return (
-    <section ref={ref} id="terrasse" className="py-24 md:py-32 bg-noir">
+    <section
+      ref={ref}
+      id="terrasse"
+      className="py-24 md:py-32 transition-colors duration-[1200ms]"
+      style={{ backgroundColor: isDay ? "#F5F0E8" : "#0C0C0C" }}
+    >
       <div className="max-w-7xl mx-auto px-6">
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
-          {/* Photo placeholder */}
           <motion.div
             initial={{ opacity: 0, scale: 0.95 }}
             animate={isInView ? { opacity: 1, scale: 1 } : {}}
             transition={{ duration: 0.8 }}
             className="relative aspect-[4/3] overflow-hidden"
+            style={{
+              borderRadius: isDay ? 12 : 0,
+              boxShadow: isDay ? "0 10px 40px rgba(0,0,0,0.12)" : "none",
+            }}
           >
             <Image
               src="https://images.unsplash.com/photo-1677779455198-7773892a8021?w=900&q=80"
@@ -57,31 +67,52 @@ export default function Terrasse() {
               fill
               sizes="(max-width: 1024px) 100vw, 50vw"
               className="object-cover"
+              style={{ filter: isDay ? "brightness(1.08) saturate(1.1)" : "" }}
               loading="lazy"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-noir/50 via-transparent to-noir/20 pointer-events-none" />
-            <div className="absolute inset-3 border border-or/10 pointer-events-none" />
+            <div
+              className="absolute inset-0 pointer-events-none transition-all duration-1000"
+              style={{
+                background: isDay
+                  ? "linear-gradient(to top, rgba(245,240,232,0.3) 0%, transparent 40%)"
+                  : "linear-gradient(to top, rgba(12,12,12,0.5) 0%, transparent 40%, rgba(12,12,12,0.2) 100%)",
+              }}
+            />
+            <div
+              className="absolute inset-3 pointer-events-none transition-all duration-1000"
+              style={{
+                border: "1px solid rgba(201,169,110,0.1)",
+                borderRadius: isDay ? 8 : 0,
+              }}
+            />
           </motion.div>
 
-          {/* Content */}
           <motion.div
             variants={fadeInUp}
             initial="hidden"
             animate={isInView ? "visible" : "hidden"}
           >
-            <span className="text-or/60 text-sm tracking-[0.3em] uppercase mb-4 block">
+            <span
+              className="text-sm tracking-[0.3em] uppercase mb-4 block transition-colors duration-1000"
+              style={{ color: isDay ? "rgba(139,115,85,0.6)" : "rgba(201,169,110,0.6)" }}
+            >
               Le secret de la rue de Bonald
             </span>
-            <h2 className="font-[family-name:var(--font-cormorant)] text-or text-4xl md:text-5xl font-light mb-6">
+            <h2
+              className="font-[family-name:var(--font-cormorant)] text-4xl md:text-5xl font-light mb-6 transition-colors duration-1000"
+              style={{ color: isDay ? "#3D2B1F" : "#C9A96E" }}
+            >
               La Terrasse
             </h2>
-            <p className="text-creme/70 text-base md:text-lg leading-relaxed mb-10">
+            <p
+              className="text-base md:text-lg leading-relaxed mb-10 transition-colors duration-1000"
+              style={{ color: isDay ? "rgba(61,43,31,0.7)" : "rgba(245,240,232,0.7)" }}
+            >
               Nichée à l&apos;arrière du restaurant, notre terrasse ombragée est
               un secret bien gardé du centre-ville de Rodez. Un écrin de verdure
               pour des dîners sous les étoiles.
             </p>
 
-            {/* Features */}
             <motion.div
               variants={staggerContainer}
               initial="hidden"
@@ -89,17 +120,26 @@ export default function Terrasse() {
               className="space-y-6"
             >
               {features.map((f) => (
-                <motion.div
-                  key={f.titre}
-                  variants={staggerItem}
-                  className="flex items-start gap-4"
-                >
-                  <div className="text-or mt-0.5 flex-shrink-0">{f.icon}</div>
+                <motion.div key={f.titre} variants={staggerItem} className="flex items-start gap-4">
+                  <div
+                    className="mt-0.5 flex-shrink-0 transition-colors duration-1000"
+                    style={{ color: isDay ? "#8B6914" : "#C9A96E" }}
+                  >
+                    {f.icon}
+                  </div>
                   <div>
-                    <h4 className="font-[family-name:var(--font-cormorant)] text-creme text-xl mb-1">
+                    <h4
+                      className="font-[family-name:var(--font-cormorant)] text-xl mb-1 transition-colors duration-1000"
+                      style={{ color: isDay ? "#2C2418" : "#F5F0E8" }}
+                    >
                       {f.titre}
                     </h4>
-                    <p className="text-creme/50 text-sm">{f.desc}</p>
+                    <p
+                      className="text-sm transition-colors duration-1000"
+                      style={{ color: isDay ? "rgba(61,43,31,0.5)" : "rgba(245,240,232,0.5)" }}
+                    >
+                      {f.desc}
+                    </p>
                   </div>
                 </motion.div>
               ))}

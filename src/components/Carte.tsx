@@ -3,6 +3,7 @@
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
 import { fadeInUp, staggerContainer, staggerItem } from "@/lib/animations";
+import { useDayNight } from "@/context/DayNightContext";
 
 interface Plat {
   nom: string;
@@ -55,29 +56,42 @@ const formules = [
 export default function Carte() {
   const ref = useRef<HTMLElement>(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
+  const { isDay } = useDayNight();
 
   return (
-    <section ref={ref} id="carte" className="py-24 md:py-32 bg-noir-light">
+    <section
+      ref={ref}
+      id="carte"
+      className="py-24 md:py-32 transition-colors duration-[1200ms]"
+      style={{ backgroundColor: isDay ? "#FDFBF7" : "#111111" }}
+    >
       <div className="max-w-4xl mx-auto px-6">
-        {/* Header */}
         <motion.div
           variants={fadeInUp}
           initial="hidden"
           animate={isInView ? "visible" : "hidden"}
           className="text-center mb-16"
         >
-          <span className="text-or/60 text-sm tracking-[0.3em] uppercase mb-4 block">
+          <span
+            className="text-sm tracking-[0.3em] uppercase mb-4 block transition-colors duration-1000"
+            style={{ color: isDay ? "rgba(139,115,85,0.6)" : "rgba(201,169,110,0.6)" }}
+          >
             Migrations culinaires
           </span>
-          <h2 className="font-[family-name:var(--font-cormorant)] text-or text-4xl md:text-5xl lg:text-6xl font-light mb-4">
+          <h2
+            className="font-[family-name:var(--font-cormorant)] text-4xl md:text-5xl lg:text-6xl font-light mb-4 transition-colors duration-1000"
+            style={{ color: isDay ? "#3D2B1F" : "#C9A96E" }}
+          >
             La Carte
           </h2>
-          <p className="font-[family-name:var(--font-playfair)] italic text-creme/60 text-lg">
+          <p
+            className="font-[family-name:var(--font-playfair)] italic text-lg transition-colors duration-1000"
+            style={{ color: isDay ? "rgba(61,43,31,0.5)" : "rgba(245,240,232,0.6)" }}
+          >
             Chaque saison est un nouveau voyage
           </p>
         </motion.div>
 
-        {/* Categories */}
         {categories.map((cat, catIdx) => (
           <motion.div
             key={cat.titre}
@@ -86,37 +100,62 @@ export default function Carte() {
             animate={isInView ? "visible" : "hidden"}
             className="mb-16"
           >
-            {/* Category title */}
             <motion.div variants={staggerItem} className="flex items-center gap-4 mb-8">
-              <h3 className="font-[family-name:var(--font-cormorant)] text-creme text-2xl md:text-3xl">
+              <h3
+                className="font-[family-name:var(--font-cormorant)] text-2xl md:text-3xl transition-colors duration-1000"
+                style={{ color: isDay ? "#2C2418" : "#F5F0E8" }}
+              >
                 {cat.titre}
               </h3>
-              <div className="h-[1px] flex-1 bg-gradient-to-r from-or/30 to-transparent" />
-              <span className="font-[family-name:var(--font-playfair)] italic text-or/50 text-sm">
+              <div
+                className="h-[1px] flex-1 transition-colors duration-1000"
+                style={{
+                  background: isDay
+                    ? "linear-gradient(to right, rgba(201,169,110,0.35), transparent)"
+                    : "linear-gradient(to right, rgba(201,169,110,0.3), transparent)",
+                }}
+              />
+              <span
+                className="font-[family-name:var(--font-playfair)] italic text-sm transition-colors duration-1000"
+                style={{ color: isDay ? "rgba(139,115,85,0.5)" : "rgba(201,169,110,0.5)" }}
+              >
                 {cat.sousTitre}
               </span>
             </motion.div>
 
-            {/* Dishes */}
             <div className="space-y-4">
               {cat.plats.map((plat) => (
-                <motion.div
-                  key={plat.nom}
-                  variants={staggerItem}
-                  className="flex items-baseline gap-3 group"
-                >
-                  <span className="font-[family-name:var(--font-playfair)] italic text-creme/80 text-base md:text-lg group-hover:text-creme transition-colors duration-300 flex-1">
+                <motion.div key={plat.nom} variants={staggerItem} className="flex items-baseline gap-3 group">
+                  <span
+                    className="font-[family-name:var(--font-playfair)] italic text-base md:text-lg flex-1 transition-colors duration-700"
+                    style={{ color: isDay ? "rgba(44,36,24,0.8)" : "rgba(245,240,232,0.8)" }}
+                  >
                     {plat.nom}
                   </span>
-                  <span className="hidden sm:block flex-1 border-b border-dotted border-or/15 min-w-[40px] -translate-y-1" />
-                  <span className="text-or font-light text-lg">{plat.prix}</span>
+                  <span
+                    className="hidden sm:block flex-1 min-w-[40px] -translate-y-1 transition-colors duration-1000"
+                    style={{
+                      borderBottom: isDay
+                        ? "1px dotted rgba(201,169,110,0.2)"
+                        : "1px dotted rgba(201,169,110,0.15)",
+                    }}
+                  />
+                  <span
+                    className="font-light text-lg transition-colors duration-1000"
+                    style={{ color: isDay ? "#8B6914" : "#C9A96E" }}
+                  >
+                    {plat.prix}
+                  </span>
                 </motion.div>
               ))}
             </div>
 
             {catIdx < categories.length - 1 && (
               <div className="mt-12 flex justify-center">
-                <div className="w-1 h-1 rounded-full bg-or/40" />
+                <div
+                  className="w-1 h-1 rounded-full transition-colors duration-1000"
+                  style={{ backgroundColor: isDay ? "rgba(139,105,20,0.4)" : "rgba(201,169,110,0.4)" }}
+                />
               </div>
             )}
           </motion.div>
@@ -127,28 +166,49 @@ export default function Carte() {
           variants={fadeInUp}
           initial="hidden"
           animate={isInView ? "visible" : "hidden"}
-          className="mt-20 border border-or/30 p-8 md:p-12 relative"
+          className="mt-20 p-8 md:p-12 relative transition-colors duration-1000"
+          style={{
+            border: isDay
+              ? "1px solid rgba(201,169,110,0.3)"
+              : "1px solid rgba(201,169,110,0.3)",
+          }}
         >
-          {/* Corner decorations */}
           <div className="absolute top-0 left-0 w-4 h-4 border-t border-l border-or" />
           <div className="absolute top-0 right-0 w-4 h-4 border-t border-r border-or" />
           <div className="absolute bottom-0 left-0 w-4 h-4 border-b border-l border-or" />
           <div className="absolute bottom-0 right-0 w-4 h-4 border-b border-r border-or" />
 
-          <h3 className="font-[family-name:var(--font-cormorant)] text-or text-2xl md:text-3xl text-center mb-8">
+          <h3
+            className="font-[family-name:var(--font-cormorant)] text-2xl md:text-3xl text-center mb-8 transition-colors duration-1000"
+            style={{ color: isDay ? "#8B6914" : "#C9A96E" }}
+          >
             Formules
           </h3>
           <div className="space-y-6">
             {formules.map((f) => (
               <div key={f.nom} className="flex flex-col sm:flex-row sm:items-baseline gap-1 sm:gap-3">
-                <span className="font-[family-name:var(--font-cormorant)] text-creme text-xl font-medium">
+                <span
+                  className="font-[family-name:var(--font-cormorant)] text-xl font-medium transition-colors duration-1000"
+                  style={{ color: isDay ? "#2C2418" : "#F5F0E8" }}
+                >
                   {f.nom}
                 </span>
                 {f.desc && (
-                  <span className="text-creme/50 text-sm">{f.desc}</span>
+                  <span
+                    className="text-sm transition-colors duration-1000"
+                    style={{ color: isDay ? "rgba(44,36,24,0.5)" : "rgba(245,240,232,0.5)" }}
+                  >
+                    {f.desc}
+                  </span>
                 )}
-                <span className="hidden sm:block flex-1 border-b border-dotted border-or/15 min-w-[20px] -translate-y-1" />
-                <span className="text-or text-2xl font-[family-name:var(--font-cormorant)] font-semibold">
+                <span
+                  className="hidden sm:block flex-1 min-w-[20px] -translate-y-1"
+                  style={{ borderBottom: "1px dotted rgba(201,169,110,0.15)" }}
+                />
+                <span
+                  className="text-2xl font-[family-name:var(--font-cormorant)] font-semibold transition-colors duration-1000"
+                  style={{ color: isDay ? "#8B6914" : "#C9A96E" }}
+                >
                   {f.prix}
                 </span>
               </div>

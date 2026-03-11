@@ -1,6 +1,9 @@
 "use client";
 
+import { DayNightProvider } from "@/context/DayNightContext";
 import Navbar from "@/components/Navbar";
+import SkyBackground from "@/components/SkyBackground";
+import TransitionRipple from "@/components/TransitionRipple";
 import Hero from "@/components/Hero";
 import GoldenThread from "@/components/GoldenThread";
 import Histoire from "@/components/Histoire";
@@ -13,7 +16,9 @@ import Footer from "@/components/Footer";
 
 export default function Home() {
   return (
-    <>
+    <DayNightProvider>
+      <SkyBackground />
+      <TransitionRipple />
       <Navbar />
       <main className="relative">
         <GoldenThread />
@@ -26,6 +31,6 @@ export default function Home() {
         <Reservation />
       </main>
       <Footer />
-    </>
+    </DayNightProvider>
   );
 }

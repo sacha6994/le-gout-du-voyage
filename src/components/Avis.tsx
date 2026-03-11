@@ -69,7 +69,7 @@ export default function Avis() {
       ref={ref}
       id="avis"
       className="relative py-24 md:py-32 overflow-hidden transition-colors duration-[1200ms]"
-      style={{ backgroundColor: isDay ? "#FDFBF7" : "#0C0C0C" }}
+      style={{ backgroundColor: isDay ? "rgba(253,251,247,0.88)" : "rgba(12,12,12,0.92)" }}
     >
       {/* Floating particles */}
       <div className="absolute inset-0 pointer-events-none">

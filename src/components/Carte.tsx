@@ -63,7 +63,7 @@ export default function Carte() {
       ref={ref}
       id="carte"
       className="py-24 md:py-32 transition-colors duration-[1200ms]"
-      style={{ backgroundColor: isDay ? "#FDFBF7" : "#111111" }}
+      style={{ backgroundColor: isDay ? "rgba(253,251,247,0.88)" : "rgba(17,17,17,0.92)" }}
     >
       <div className="max-w-4xl mx-auto px-6">
         <motion.div

@@ -47,7 +47,7 @@ export default function Terrasse() {
       ref={ref}
       id="terrasse"
       className="py-24 md:py-32 transition-colors duration-[1200ms]"
-      style={{ backgroundColor: isDay ? "#F5F0E8" : "#0C0C0C" }}
+      style={{ backgroundColor: isDay ? "rgba(245,240,232,0.88)" : "rgba(12,12,12,0.92)" }}
     >
       <div className="max-w-7xl mx-auto px-6">
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">

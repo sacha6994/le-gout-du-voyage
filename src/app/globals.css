@@ -84,3 +84,29 @@
 .scroll-indicator {
   animation: scroll-down 1.5s ease-in-out infinite;
 }
+
+/* Star twinkling animations */
+@keyframes twinkle-soft {
+  0%, 100% { opacity: 0.12; transform: scale(1); }
+  50% { opacity: 0.5; transform: scale(1.1); }
+}
+
+@keyframes twinkle-medium {
+  0%, 100% { opacity: 0.2; transform: scale(1); }
+  50% { opacity: 0.75; transform: scale(1.25); }
+}
+
+@keyframes twinkle-bright {
+  0%, 100% { opacity: 0.45; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.5); }
+}
+
+/* Cloud drifting animation */
+@keyframes cloud-drift-kf {
+  from { transform: translateX(-20vw); }
+  to { transform: translateX(110vw); }
+}
+
+.cloud-drift {
+  animation: cloud-drift-kf linear infinite;
+}

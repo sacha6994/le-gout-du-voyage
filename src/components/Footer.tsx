@@ -11,7 +11,7 @@ export default function Footer() {
     <footer
       className="py-16 transition-colors duration-[1200ms]"
       style={{
-        backgroundColor: isDay ? "#EEEBE4" : "#050505",
+        backgroundColor: isDay ? "rgba(238,235,228,0.90)" : "rgba(5,5,5,0.93)",
         borderTop: isDay ? "1px solid rgba(201,169,110,0.1)" : "1px solid rgba(201,169,110,0.05)",
       }}
     >

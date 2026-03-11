@@ -71,7 +71,7 @@ export default function Reservation() {
   const mutedText = isDay ? "rgba(61,43,31,0.45)" : "rgba(245,240,232,0.4)";
   const bodyText = isDay ? "rgba(44,36,24,0.7)" : "rgba(245,240,232,0.7)";
   const accentColor = isDay ? "#8B6914" : "#C9A96E";
-  const sectionBg = isDay ? "#F5F0E8" : "#111111";
+  const sectionBg = isDay ? "rgba(245,240,232,0.88)" : "rgba(17,17,17,0.92)";
   const cardBg = isDay ? "rgba(255,255,255,0.85)" : "rgba(12,12,12,0.8)";
 
   const labelCls = "text-[10px] tracking-[0.25em] uppercase mb-2 block transition-colors duration-1000";
@@ -275,7 +275,7 @@ export default function Reservation() {
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ delay: 0.4, duration: 0.8 }}
           className="mt-8 aspect-[21/6] flex items-center justify-center relative overflow-hidden transition-colors duration-1000"
-          style={{ backgroundColor: isDay ? "#EEEBE4" : "#0C0C0C", border: `1px solid ${inputBorder}` }}
+          style={{ backgroundColor: isDay ? "rgba(238,235,228,0.9)" : "rgba(12,12,12,0.92)", border: `1px solid ${inputBorder}` }}
         >
           <div className="absolute inset-0 opacity-5">
             {Array.from({ length: 8 }).map((_, i) => (

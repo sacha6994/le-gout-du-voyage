@@ -7,15 +7,28 @@ export default function Hero() {
 
   return (
     <section className="relative h-screen flex flex-col items-center justify-center overflow-hidden">
-      {/* Background with overlay */}
-      <div className="absolute inset-0 bg-noir">
-        {/* Placeholder for hero image - dark atmospheric photo */}
-        <div className="absolute inset-0 bg-gradient-to-b from-noir/60 via-noir/40 to-noir" />
+      {/* Video background */}
+      <div className="absolute inset-0">
+        <video
+          autoPlay
+          muted
+          loop
+          playsInline
+          className="absolute inset-0 w-full h-full object-cover scale-110"
+          style={{ filter: "blur(4px) brightness(0.35)" }}
+        >
+          <source
+            src="https://videos.pexels.com/video-files/2894888/2894888-hd_1920_1080_24fps.mp4"
+            type="video/mp4"
+          />
+        </video>
+        {/* Gradient overlays */}
+        <div className="absolute inset-0 bg-gradient-to-b from-noir/50 via-noir/30 to-noir" />
         <div
-          className="absolute inset-0 opacity-20"
+          className="absolute inset-0"
           style={{
             backgroundImage:
-              "radial-gradient(ellipse at 50% 40%, #C9A96E10 0%, transparent 60%)",
+              "radial-gradient(ellipse at 50% 40%, #C9A96E08 0%, transparent 60%)",
           }}
         />
       </div>
@@ -68,7 +81,11 @@ export default function Hero() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 2.6, duration: 0.8 }}
-          whileHover={{ scale: 1.03, backgroundColor: "#C9A96E", color: "#0C0C0C" }}
+          whileHover={{
+            scale: 1.03,
+            backgroundColor: "#C9A96E",
+            color: "#0C0C0C",
+          }}
           className="inline-block border border-or text-or px-8 py-3 text-sm tracking-[0.2em] uppercase transition-all duration-500"
         >
           Réserver une table
@@ -82,7 +99,9 @@ export default function Hero() {
         transition={{ delay: 3.2, duration: 1 }}
         className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2"
       >
-        <span className="text-or/50 text-xs tracking-[0.2em] uppercase">Découvrir</span>
+        <span className="text-or/50 text-xs tracking-[0.2em] uppercase">
+          Découvrir
+        </span>
         <div className="w-[1px] h-8 bg-gradient-to-b from-or/60 to-transparent scroll-indicator" />
       </motion.div>
     </section>

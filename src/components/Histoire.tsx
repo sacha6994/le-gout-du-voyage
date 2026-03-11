@@ -2,19 +2,12 @@
 
 import { useRef } from "react";
 import Image from "next/image";
-import { motion, useScroll, useTransform, useInView } from "framer-motion";
+import { motion, useInView } from "framer-motion";
 import { fadeInUp, slideInLeft, slideInRight } from "@/lib/animations";
 
 export default function Histoire() {
   const sectionRef = useRef<HTMLElement>(null);
-  const pathRef = useRef<SVGPathElement>(null);
   const isInView = useInView(sectionRef, { once: true, margin: "-100px" });
-  const { scrollYProgress } = useScroll({
-    target: sectionRef,
-    offset: ["start end", "end start"],
-  });
-
-  const pathLength = useTransform(scrollYProgress, [0.1, 0.6], [0, 1]);
 
   return (
     <section
@@ -22,24 +15,6 @@ export default function Histoire() {
       id="histoire"
       className="relative py-24 md:py-32 bg-noir overflow-hidden"
     >
-      {/* Golden travel line SVG */}
-      <svg
-        className="absolute inset-0 w-full h-full pointer-events-none"
-        viewBox="0 0 1200 800"
-        fill="none"
-        preserveAspectRatio="none"
-      >
-        <motion.path
-          ref={pathRef}
-          d="M-50,400 C100,200 300,600 500,350 S700,100 900,400 S1100,600 1300,300"
-          stroke="#C9A96E"
-          strokeWidth="1"
-          strokeOpacity="0.2"
-          fill="none"
-          style={{ pathLength }}
-        />
-      </svg>
-
       <div className="max-w-7xl mx-auto px-6">
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
           {/* Text */}

@@ -2,6 +2,7 @@
 
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
+import GoldenThread from "@/components/GoldenThread";
 import Histoire from "@/components/Histoire";
 import Carte from "@/components/Carte";
 import Galerie from "@/components/Galerie";
@@ -14,7 +15,8 @@ export default function Home() {
   return (
     <>
       <Navbar />
-      <main>
+      <main className="relative">
+        <GoldenThread />
         <Hero />
         <Histoire />
         <Carte />
